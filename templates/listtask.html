@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h6>List of Tasks</h6>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.no }}</td>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.formatted_date }}</td> <!-- Assuming you've defined the formatted_date method in your Task model -->
+                        <td>
+                            <a href="" class="btn btn-info btn-sm">Details</a>
+                            <a href="" class="btn btn-success btn-sm">Update</a>
+                            <a href="" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
