@@ -13,8 +13,17 @@
         <p>{{ task.description }}</p>
     
     <div class='w-100'>
-    <a href="{% url 'listtask' %}" class="btn btn-secondary">Go back</a>
-<a href="#" class="btn btn-success">Mark as complete</a>
+    
+    <form method="post" action="{% url 'completetask' task.pk %}">
+        {% csrf_token %}
+        <a href="{% url 'listtask' %}" class="btn btn-secondary">Go back</a>
+        {% if not task.is_completed %}
+        <button type="submit" class="btn btn-success">Mark as Completed</button>
+        {% endif %}
+        {% if  task.is_completed %}
+        Completed Task
+        {% endif %}
+      </form>
 </div>
 </div>
 

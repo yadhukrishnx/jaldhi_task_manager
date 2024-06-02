@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h6>List of Pending Tasks</h6>
+            <h6>List of Completed Tasks </h6>
             <hr>
             <table class="table table-striped">
                 <thead>
@@ -23,7 +23,7 @@
                         <td>{{ task.title }}</td>
                         <td>{{ task.formatted_date }}</td> <!-- Assuming you've defined the formatted_date method in your Task model -->
                         <td>
-                            <a href="{% url 'taskdetails' task.no %}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Details</a>
+                            <a href="{% url 'taskdetails' task.no %}" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Details</a>
                           
                         </td>
                     </tr>

@@ -21,10 +21,21 @@ def addtask(request):
     return render(request,'addtask.html',{'form':form,'task':task})
 
 def listtask(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(is_completed=False)
     return render(request, 'listtask.html', {'tasks': tasks})
+def completedtask(request):
+    tasks = Task.objects.filter(is_completed=True)
+    return render(request, 'completedtask.html', {'tasks': tasks})
 
 
 def taskdetails(request, pk):
     task = get_object_or_404(Task, pk=pk)
     return render(request, 'taskdetails.html', {'task': task})
+
+def completetask(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == "POST":
+        task.is_completed = True
+        task.save()
+        return redirect('listtask')
+    return redirect('listtask')
