@@ -5,4 +5,5 @@ urlpatterns = [
    path("base/",views.index,name="home"),
    path("",views.addtask,name="addtask"),
    path("listtask",views.listtask,name="listtask"),
+   path("task/<int:pk>/",views.taskdetails,name="taskdetails"),
 ]
