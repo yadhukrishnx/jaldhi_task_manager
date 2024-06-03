@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Task
-from .forms import Taskform
+from .models import Task,UserProfile
+from .forms import Taskform,ProfileForm,ImageUploadForm
 from django.core.paginator import Paginator,EmptyPage
 from django.db.models import Q
 from django.contrib.auth.models import User,auth
@@ -45,6 +45,32 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('register')
+
+
+def profile(request):
+    user_profile = UserProfile.objects.first()  
+    return render(request, 'viewprofile.html', {'user_profile': user_profile})
+def editpage(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)  
+    profile_form = ProfileForm(instance=user_profile)
+    image_form = ImageUploadForm(instance=user_profile)
+    return render(request, 'editprofile.html',{'profile_form': profile_form, 'image_form': image_form})
+def editprofile(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)  
+    
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, instance=user_profile)
+        image_form = ImageUploadForm(request.POST, request.FILES, instance=user_profile)
+        
+        if profile_form.is_valid() and image_form.is_valid():
+            profile_form.save()
+            image_form.save()
+            return redirect('profile')  # Redirect to the view profile page after saving
+    else:
+        profile_form = ProfileForm(instance=user_profile)
+        image_form = ImageUploadForm(instance=user_profile)
+    
+    return render(request, 'editprofile.html', {'profile_form': profile_form, 'image_form': image_form})
 
 def index(request):
     return render(request,'index.html')
@@ -125,3 +151,8 @@ def searchtask(request):
 
 
 
+
+
+def viewprofile(request):
+
+    return render(request, 'viewprofile.html')

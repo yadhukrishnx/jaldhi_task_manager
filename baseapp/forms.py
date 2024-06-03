@@ -1,6 +1,8 @@
 from django import forms
 
-from .models import Task
+from .models import Task,UserProfile
+
+from django.contrib.auth.models import User
 
 class Taskform(forms.ModelForm):
     
@@ -13,3 +15,13 @@ class Taskform(forms.ModelForm):
             'description':forms.Textarea(attrs={'class':'formcontrol1','placeholder':'Enter Task Description'}),
         }
         
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+class ImageUploadForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['image']
