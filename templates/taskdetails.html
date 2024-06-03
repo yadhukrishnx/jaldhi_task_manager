@@ -16,12 +16,15 @@
     
     <form method="post" action="{% url 'completetask' task.pk %}">
         {% csrf_token %}
-        <a href="{% url 'listtask' %}" class="btn btn-secondary">Go back</a>
+       
         {% if not task.is_completed %}
+        <a href="{% url 'listtask' %}" class="btn btn-secondary">Go back</a>
         <button type="submit" class="btn btn-success">Mark as Completed</button>
         {% endif %}
         {% if  task.is_completed %}
+        <a href="{% url 'completedtask' %}" class="btn btn-secondary">Go back</a>
         <button type="submit" class="btn btn-outline-danger">Mark as Incomplete</button>
+        <a href="{% url 'deletetask' task.no  %}" class="btn btn-danger">Delete Task</a>
         {% endif %}
       </form>
 </div>

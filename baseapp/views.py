@@ -40,3 +40,14 @@ def completetask(request, pk):
         task.save()
         return redirect('listtask')
     return redirect('listtask')
+
+def deletetask(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    return render(request, 'deletetask.html', {'task': task})
+
+def confirmdelete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == "POST":
+        task.delete()
+        return redirect('completedtask')
+    return redirect('completedtask')
