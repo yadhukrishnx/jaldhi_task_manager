@@ -3,6 +3,7 @@ from .models import Task
 from .forms import Taskform
 from django.core.paginator import Paginator,EmptyPage
 from django.db.models import Q
+
 # Create your views here.
 
 def index(request):
@@ -81,3 +82,6 @@ def searchtask(request):
         not_found_message="No Task Found"
         
     return render(request,'searchtask.html',{'query':query,'tasks':tasks,'not_found_message':not_found_message})
+
+
+

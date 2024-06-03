@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+
 # Create your models here.
 
 
@@ -15,3 +16,4 @@ class Task(models.Model):
     
     def formatted_date(self):
         return self.date.strftime('%d/%m/%Y')
+    

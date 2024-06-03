@@ -11,4 +11,5 @@ urlpatterns = [
    path("completetask/<int:pk>/",views.completetask,name="completetask"),
    path("deletetask/<int:pk>/",views.deletetask,name="deletetask"),
    path("confirmdelete/<int:pk>/",views.confirmdelete,name="confirmdelete"),
+
 ]
