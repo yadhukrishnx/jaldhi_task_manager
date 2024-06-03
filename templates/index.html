@@ -58,8 +58,8 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>USERNAME</h6>
-              <span>username</span>
+              <h6>{{ user.username }}</h6>
+              <span>{{ user.email }}</span>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
@@ -141,7 +141,7 @@
     <div class="row mt-5">
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'assets/img/add_task.jpg' %}" class="card-img-top" alt="Add Task">
+                <img src="{% static 'assets/img/add_task.png' %}" class="card-img-top" alt="Add Task">
                 <div class="card-body">
                     <h5 class="card-title">Add Tasks</h5>
                     <p class="card-text">Create new tasks and set deadlines to stay on top of your work.</p>
@@ -151,7 +151,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'assets/img/pending_tasks.jpg' %}" class="card-img-top" alt="Pending Tasks">
+                <img src="{% static 'assets/img/pending_tasks.png' %}" class="card-img-top" alt="Pending Tasks">
                 <div class="card-body">
                     <h5 class="card-title">Pending Tasks</h5>
                     <p class="card-text">View all your pending tasks and prioritize them accordingly.</p>
@@ -161,7 +161,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'assets/img/completed_tasks.jpg' %}" class="card-img-top" alt="Completed Tasks">
+                <img src="{% static 'assets/img/completed_tasks.png' %}" class="card-img-top" alt="Completed Tasks">
                 <div class="card-body">
                     <h5 class="card-title">Completed Tasks</h5>
                     <p class="card-text">Keep track of all your completed tasks and monitor your progress.</p>
