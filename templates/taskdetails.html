@@ -6,7 +6,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h3>Task {{ task.no }} :  {{ task.title }} </h3>
+        <h3>Task on {{ task.formatted_date }} :  {{ task.title }} </h3>
     </div>
     <div class='card-body'>
    
@@ -23,7 +23,7 @@
         {% endif %}
         {% if  task.is_completed %}
         <a href="{% url 'completedtask' %}" class="btn btn-secondary">Go back</a>
-        <button type="submit" class="btn btn-outline-danger">Mark as Incomplete</button>
+        <button type="submit" class="btn btn-outline-warning">Mark as Incomplete</button>
         <a href="{% url 'deletetask' task.no  %}" class="btn btn-danger">Delete Task</a>
         {% endif %}
       </form>
