@@ -36,7 +36,7 @@ def taskdetails(request, pk):
 def completetask(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == "POST":
-        task.is_completed = True
+        task.is_completed = not task.is_completed  # Toggle the value
         task.save()
         return redirect('listtask')
     return redirect('listtask')

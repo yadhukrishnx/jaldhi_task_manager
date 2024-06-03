@@ -34,3 +34,6 @@ The Task Management System is a web application built with Django that allows us
 
 1. **Clone the repository:**
    
+
+### Notes 
+ - python manage.py insert_dummy_tasks 
