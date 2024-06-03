@@ -48,7 +48,7 @@ def logout(request):
 
 
 def profile(request):
-    user_profile = UserProfile.objects.first()  
+    user_profile = UserProfile.objects.get_or_create(user=request.user).first()  
     return render(request, 'viewprofile.html', {'user_profile': user_profile})
 
 def editprofile(request):
@@ -69,7 +69,8 @@ def editprofile(request):
     return render(request, 'editprofile.html', {'profile_form': profile_form, 'image_form': image_form})
 
 def index(request):
-    return render(request,'index.html')
+    user_profile = UserProfile.objects.get_or_create(user=request.user)
+    return render(request,'index.html', {'user_profile': user_profile})
 
 def addtask(request):
     task=Task.objects.all()

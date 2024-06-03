@@ -30,6 +30,13 @@
                         <a href="{% url 'register' %}" class="signup-image-link">Create an account</a>
                     </div>  
                     </div>
+                    {% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class=" text-danger " style="color: red;">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
                     <div class="form-group form-button">
                         <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
                     </div>
