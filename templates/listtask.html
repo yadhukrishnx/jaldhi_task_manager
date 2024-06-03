@@ -25,9 +25,9 @@
                 </thead>
                 <tbody>
                     
-                    {% for task in tasks %}
+                    {% for task in page %}
                     <tr>
-                        <td>{{ forloop.counter }}</td>
+                        <td>{{ forloop.counter|add:page.start_index|add:"-1" }}</td>
                         <td>{{ task.title }}</td>
                         <td>{{ task.formatted_date }}</td> <!-- Assuming you've defined the formatted_date method in your Task model -->
                         <td>
@@ -39,6 +39,32 @@
                     
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if page.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?{{ page.previous_page_number }}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  {% endif %}
+        
+                  {% for num in page.paginator.page_range %}
+        
+                  <li class="page-item {% if page.number == num %}activate{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    
+                {% endfor %}
+        
+                {% if page.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page=={{ page.next_page_number }}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                {% endif %}
+                </ul>
+              </nav>
         </div>
     </div>
 </div>

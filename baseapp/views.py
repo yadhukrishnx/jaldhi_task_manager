@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Task
 from .forms import Taskform
+from django.core.paginator import Paginator,EmptyPage
 
 # Create your views here.
 
@@ -21,12 +22,27 @@ def addtask(request):
     return render(request,'addtask.html',{'form':form,'task':task})
 
 def listtask(request):
+    
     tasks = Task.objects.filter(is_completed=False)
+    paginator=Paginator(tasks,10)
+    page_number=request.GET.get('page')
+    try:
+        page=paginator.get_page(page_number)
+    except EmptyPage:
+        page=paginator.page(paginator.num_pages)
+        
+    
    
-    return render(request, 'listtask.html', {'tasks': tasks})
+    return render(request, 'listtask.html', {'tasks': tasks,'page':page})
 def completedtask(request):
     tasks = Task.objects.filter(is_completed=True)
-    return render(request, 'completedtask.html', {'tasks': tasks})
+    paginator=Paginator(tasks,10)
+    page_number=request.GET.get('page')
+    try:
+        page=paginator.get_page(page_number)
+    except EmptyPage:
+        page=paginator.page(paginator.num_pages)
+    return render(request, 'completedtask.html', {'tasks': tasks,'page':page})
 
 
 def taskdetails(request, pk):
