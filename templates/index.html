@@ -92,22 +92,34 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'addtask' %}">
-          <i class="bi bi-plus-circle"></i>
-          <span>Add Task</span>
-        </a>
+        {% block content1 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link collapsed" href="{% url 'addtask' %}">
+        <i class="bi bi-plus-circle"></i>
+        <span>Add Task</span>
+      </a>
+      {% endblock %}
+        
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'listtask' %}">
-          <i class="bi bi-hourglass-split"></i>
-          <span>Pending Tasks</span>
-        </a>
+        {% block content2 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link collapsed" href="{% url 'listtask' %}">
+        <i class="bi bi-hourglass-split"></i>
+        <span>Pending Tasks</span>
+      </a>
+      {% endblock %}
+       
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'completedtask' %}">
-          <i class="bi bi-check-circle"></i>
-          <span>Completed Tasks</span>
-        </a>
+        {% block content3 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link collapsed" href="{% url 'completedtask' %}">
+        <i class="bi bi-check-circle"></i>
+        <span>Completed Tasks</span>
+      </a>
+      {% endblock %}
+       
       </li>
     </ul>
   </aside>

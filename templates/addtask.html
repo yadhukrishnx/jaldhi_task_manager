@@ -1,7 +1,13 @@
 {% extends 'index.html' %}
 {% load static %}
 
-
+{% block content1 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link " href="{% url 'addtask' %}">
+        <i class="bi bi-plus-circle"></i>
+        <span>Add Task</span>
+      </a>
+      {% endblock %}
 {% block content %}
 
 <div class="card">

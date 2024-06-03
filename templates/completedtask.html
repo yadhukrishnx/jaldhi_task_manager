@@ -1,6 +1,14 @@
 {% extends 'index.html' %}
 {% load static %}
 
+{% block content3 %}
+<!-- Your dynamic content goes here -->
+<a class="nav-link " href="{% url 'completedtask' %}">
+  <i class="bi bi-check-circle"></i>
+  <span>Completed Tasks</span>
+</a>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row">
@@ -19,7 +27,7 @@
                 <tbody>
                     {% for task in tasks %}
                     <tr>
-                        <td>{{ task.no }}</td>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ task.title }}</td>
                         <td>{{ task.formatted_date }}</td> <!-- Assuming you've defined the formatted_date method in your Task model -->
                         <td>

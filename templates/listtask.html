@@ -1,5 +1,12 @@
 {% extends 'index.html' %}
 {% load static %}
+{% block content2 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link" href="{% url 'listtask' %}">
+        <i class="bi bi-hourglass-split"></i>
+        <span>Pending Tasks</span>
+      </a>
+      {% endblock %}
 
 {% block content %}
 <div class="container">
@@ -17,9 +24,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {% for task in tasks %}
                     <tr>
-                        <td>{{ task.no }}</td>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ task.title }}</td>
                         <td>{{ task.formatted_date }}</td> <!-- Assuming you've defined the formatted_date method in your Task model -->
                         <td>
@@ -28,6 +36,7 @@
                         </td>
                     </tr>
                     {% endfor %}
+                    
                 </tbody>
             </table>
         </div>

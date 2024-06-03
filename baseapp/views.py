@@ -22,6 +22,7 @@ def addtask(request):
 
 def listtask(request):
     tasks = Task.objects.filter(is_completed=False)
+   
     return render(request, 'listtask.html', {'tasks': tasks})
 def completedtask(request):
     tasks = Task.objects.filter(is_completed=True)
