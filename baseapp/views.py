@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import Task
 from .forms import Taskform
 from django.core.paginator import Paginator,EmptyPage
-
+from django.db.models import Q
 # Create your views here.
 
 def index(request):
@@ -67,3 +67,17 @@ def confirmdelete(request, pk):
         task.delete()
         return redirect('completedtask')
     return redirect('completedtask')
+
+def searchtask(request):
+    query=None
+    tasks=None
+    not_found_message=None
+    if 'q' in request.GET:
+        query=request.GET.get('q')
+        tasks=Task.objects.filter(Q(title__icontains=query))
+    else:
+        tasks=[]
+    if not tasks:
+        not_found_message="No Task Found"
+        
+    return render(request,'searchtask.html',{'query':query,'tasks':tasks,'not_found_message':not_found_message})

@@ -43,7 +43,7 @@
     </div>
    
     <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="get" action="#">
+      <form class="search-form d-flex align-items-center" method="get" action="{% url 'searchtask' %}">
         <input type="text" name="q" placeholder="Search Task" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>

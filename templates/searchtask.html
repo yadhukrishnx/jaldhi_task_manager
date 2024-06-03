@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content2 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link" href="{% url 'listtask' %}">
+        <i class="bi bi-hourglass-split"></i>
+        <span>Pending Tasks</span>
+      </a>
+      {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h6>List of Pending Tasks</h6>
+            <hr>
+            {% if not_found_message %}
+            <p>{{ not_found_message }}</p>
+        {% else %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% if tasks %}
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.formatted_date }}</td> <!-- Assuming you've defined the formatted_date method in your Task model -->
+                        <td>
+                            <a href="{% url 'taskdetails' task.no %}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Details</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    {% endif %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
