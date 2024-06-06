@@ -48,11 +48,12 @@ def logout(request):
 
 
 def profile(request):
-    user_profile = UserProfile.objects.get_or_create(user=request.user).first()  
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     return render(request, 'viewprofile.html', {'user_profile': user_profile})
 
 def editprofile(request):
-    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
+    
     
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=request.user)
@@ -66,13 +67,16 @@ def editprofile(request):
         profile_form = ProfileForm(instance=request.user)
         image_form = ImageUploadForm(instance=user_profile)
     
-    return render(request, 'editprofile.html', {'profile_form': profile_form, 'image_form': image_form})
+    return render(request, 'editprofile.html', {'profile_form': profile_form, 'image_form': image_form, 'user_profile': user_profile})
 
 def index(request):
-    user_profile = UserProfile.objects.get_or_create(user=request.user)
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
+   
+    
     return render(request,'index.html', {'user_profile': user_profile})
 
 def addtask(request):
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     task=Task.objects.all()
     if request.method=='POST':
         form=Taskform(request.POST)
@@ -83,10 +87,10 @@ def addtask(request):
         form = Taskform()
     
     
-    return render(request,'addtask.html',{'form':form,'task':task})
+    return render(request,'addtask.html',{'form':form,'task':task,'user_profile': user_profile})
 
 def listtask(request):
-    
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     tasks = Task.objects.filter(is_completed=False)
     paginator=Paginator(tasks,10)
     page_number=request.GET.get('page')
@@ -97,8 +101,9 @@ def listtask(request):
         
     
    
-    return render(request, 'listtask.html', {'tasks': tasks,'page':page})
+    return render(request, 'listtask.html', {'tasks': tasks,'page':page,'user_profile': user_profile})
 def completedtask(request):
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     tasks = Task.objects.filter(is_completed=True)
     paginator=Paginator(tasks,10)
     page_number=request.GET.get('page')
@@ -106,14 +111,16 @@ def completedtask(request):
         page=paginator.get_page(page_number)
     except EmptyPage:
         page=paginator.page(paginator.num_pages)
-    return render(request, 'completedtask.html', {'tasks': tasks,'page':page})
+    return render(request, 'completedtask.html', {'tasks': tasks,'page':page,'user_profile': user_profile})
 
 
 def taskdetails(request, pk):
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     task = get_object_or_404(Task, pk=pk)
-    return render(request, 'taskdetails.html', {'task': task})
+    return render(request, 'taskdetails.html', {'task': task,'user_profile': user_profile})
 
 def completetask(request, pk):
+    
     task = get_object_or_404(Task, pk=pk)
     if request.method == "POST":
         task.is_completed = not task.is_completed  # Toggle the value
@@ -122,8 +129,9 @@ def completetask(request, pk):
     return redirect('listtask')
 
 def deletetask(request, pk):
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     task = get_object_or_404(Task, pk=pk)
-    return render(request, 'deletetask.html', {'task': task})
+    return render(request, 'deletetask.html', {'task': task,'user_profile': user_profile})
 
 def confirmdelete(request, pk):
     task = get_object_or_404(Task, pk=pk)
@@ -133,6 +141,7 @@ def confirmdelete(request, pk):
     return redirect('completedtask')
 
 def searchtask(request):
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     query=None
     tasks=None
     not_found_message=None
@@ -144,7 +153,7 @@ def searchtask(request):
     if not tasks:
         not_found_message="No Task Found"
         
-    return render(request,'searchtask.html',{'query':query,'tasks':tasks,'not_found_message':not_found_message})
+    return render(request,'searchtask.html',{'query':query,'tasks':tasks,'not_found_message':not_found_message,'user_profile': user_profile})
 
 
 

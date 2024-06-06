@@ -1,6 +1,12 @@
 {% extends 'index.html' %}
 {% load static %}
-
+{% block content4 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link collapsed" href="{% url 'home' %}">
+        <i class="bi bi-house"></i>
+        <span>Home</span>
+      </a>
+      {% endblock %}
 {% block content3 %}
 <!-- Your dynamic content goes here -->
 <a class="nav-link " href="{% url 'completedtask' %}">
